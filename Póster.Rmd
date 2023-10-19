@@ -20,9 +20,8 @@ affiliation:
 Way:
 main_findings:
   - "**Depopulation Risk in Castilla-La Mancha**"
-logoleft_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
+logoleft_name: PNG/UCLM.png
 logoright_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
-logocenter_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png
 output: 
   posterdown::posterdown_betterport:
     self_contained: false
@@ -50,7 +49,7 @@ This is the `posterdown_betterport` template for the {posterdown} package! I was
 knitr::write_bib(c('posterdown', 'rmarkdown','pagedown'), 'packages.bib')
 ```
 
-## Objectives
+# Objectives
 
 1.  Pick a template layout.
 2.  Write/ create your poster content distraction free.
