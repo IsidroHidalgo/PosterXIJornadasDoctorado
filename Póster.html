@@ -187,7 +187,7 @@ padding: 0px;
 }
 .outer {
 width: 36in;
-height: calc(48in *  (1 - 0.1 - 0.1 - 0.01) );
+height: calc(48in *  (1 - 0.1 - 3.0e-2 - 0.01) );
 -webkit-column-count: 3; /* Chrome, Safari, Opera */
 -moz-column-count: 3; /* Firefox */
 column-count: 3;
@@ -372,8 +372,8 @@ padding: 0cm;
 }
 .main_bottom {
 width: 36in;
-height: calc(48in * 0.1);
-margin-top: calc(48in * (1 - 0.1));
+height: calc(48in * 3.0e-2);
+margin-top: calc(48in * (1 - 3.0e-2));
 position: absolute;
 background-color: #0b4545;
 background-image: linear-gradient(#008080 10%, #0b4545);
@@ -449,7 +449,7 @@ span > #tab:mytable {
 
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>This is the <code>posterdown_betterport</code> template for the {posterdown} package! I was inspired by the twitter thread of <a href="https://mobile.twitter.com/mikemorrison/status/1110191245035479041">Mike Morrison</a> and wanted to apply the <code>#betterposter</code> concept to the reproducible (yet simple to use) functionality of the {posterdown} package <span class="citation">(<a href="#ref-R-posterdown">Thorne 2019</a>)</span>. If you’re not an R user don’t sweat as you do <strong>NOT</strong> need to use it at all! Feel free to use only the Markdown functionality of this package :)</p>
+<p>Did you know that some areas of Castilla-La Mancha have <code>a lower population density than Siberia</code>? template for the {posterdown} package! I was inspired by the twitter thread of <a href="https://mobile.twitter.com/mikemorrison/status/1110191245035479041">Mike Morrison</a> and wanted to apply the <code>#betterposter</code> concept to the reproducible (yet simple to use) functionality of the {posterdown} package <span class="citation">(<a href="#ref-R-posterdown">Thorne 2019</a>)</span>. If you’re not an R user don’t sweat as you do <strong>NOT</strong> need to use it at all! Feel free to use only the Markdown functionality of this package :)</p>
 </div>
 <div id="objectives" class="section level1">
 <h1>Objectives</h1>
@@ -781,14 +781,6 @@ setosa
 <p>Jombart,
 T.; Devillard, S.; Dufour, A.-B.; Pontier, D. <em>Revealing cryptic spatial patterns in genetic variability by a new
 multivariate method</em>, Heredity, 101 (2008), 92-103.</p>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-R-posterdown" class="csl-entry">
-Thorne, Brent. 2019. <em>Posterdown: Generate PDF Conference Posters Using r Markdown</em>. <a href="https://github.com/brentthorne/posterdown">https://github.com/brentthorne/posterdown</a>.
-</div>
-<div id="ref-R-pagedown" class="csl-entry">
-Xie, Yihui, Romain Lesur, Brent Thorne, and Xianying Tan. 2022. <em>Pagedown: Paginate the HTML Output of r Markdown with CSS for Print</em>. <a href="https://github.com/rstudio/pagedown">https://github.com/rstudio/pagedown</a>.
-</div>
-</div>
 </div>
 
 </div>
@@ -797,8 +789,8 @@ Xie, Yihui, Romain Lesur, Brent Thorne, and Xianying Tan. 2022. <em>Pagedown: Pa
 </div>
 <div class="main_bottom">
 <img id="main-img-left" src=PNG/UCLM.png>
-<img id="main-img-center" src=https://raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png>
-<img id="main-img-right" src=https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png>
+<img id="main-img-center" src=>
+<img id="main-img-right" src=PNG/RepoGitHub.png>
 </div>
 </div>
 
