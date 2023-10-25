@@ -1,0 +1,5 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: 11in 22in; /*columns widths*/
+  column-gap: 0.05in;
+}
