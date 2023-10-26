@@ -4,7 +4,7 @@ main_bottomsize: 0.03
 #ESSENTIALS
 title: '**Design of a Spatial Depopulation Risk Indicator**'
 author:
-  - name: '**Isidro Hidalgo Arellano & Gema Fernández-Avilés Calderón** Isidro.Hidalgo@uclm.es - Gema.FAviles@uclm.es'
+  - name: '**Isidro Hidalgo Arellano & Gema Fernández-Avilés Calderón** Isidro.Hidalgo@uclm.es Gema.FAviles@uclm.es'
     main: true
 Way:
 main_findings:
@@ -38,18 +38,29 @@ options(knitr.table.format = "html")
 
 ::: {.col_1}
 
+
 # Introduction
 
-Did you know that some areas of Castilla-La Mancha have `a lower population density than Siberia`?
+:::::: {.columns}
+::: {.column width="45%"}
+Did you know that some areas of Cuenca y Guadalajara have `a lower population density than Siberia`?
+:::
+::: {.column width="55%"}
+```{r, figura_1, out.width="90%", fig.align='center'}
+knitr::include_graphics("PNG/Baikal.jpg")
+```
+:::
+::::::
 
 
 # Objectives
 
--   [**General**](): Construction of a Spatial Depopulation Risk Index using spatial Principal Component Analysis
+-   [**General**](): Construction of a Spatial Depopulation Risk Index using spatial Principal Component Analysis to ranking the municipalities of Castilla-La Mancha 
 -   [**Secondaries**]():
-    -   to detect spatial dependence in depopulation in Castilla-La Mancha
-    -   to calculate the range of this spatial dependence
-    -   to extract the index from the principal component and to scale it
+    -   to detect spatial dependence of depopulation in Castilla-La Mancha
+    -   to calculate the range of the spatial dependence
+    -   to include the spatial dependence in a depopulation risk index
+    -   to rank the municipalities of Castilla-La Mancha in terms of risk depopulation in order to identify areas in which counter-measures can be applied
 
 # Methods
 
@@ -59,11 +70,12 @@ $$
 I= \frac{N}{\sum _{i}\sum _{j} w_{ij}} \frac {\sum _{i}\sum _{j} w_{ij} (X_i - \bar{X}) (X_j - \bar{X})} {\sum _{i} (X_i - \bar{X})^2}
 $$
 
-To reference a citation you can add your `.bib` file to the working directory and name it in the YAML metadata or generate an automated one as done here, then you only need to reference the label value in the `.bib` file. For example this package is built on top of the wonderful {pagedown} package and I will cite it at the end of this sentance using this in the rmd.
+Range of spatial dependence is extracted from the semivariogram, the heart of Geostatistics, which is a tool that catch the spatial dependence according to the distance.
 
-To get a better understanding of how to include features like these please refer to the {posterdown} [wiki](https://github.com/brentthorne/posterdown/wiki).
+```{r, figura_2, out.width="95%", fig.align='center'}
+knitr::include_graphics("PNG/Semivariogram.png")
+```
 
-***Now on to the results!***
 
 :::
 
@@ -74,7 +86,6 @@ To get a better understanding of how to include features like these please refer
 :::::: {.columns}
 ::: {.column width="50%"}
 
-Here you may have some figures to show off, bellow I have made a scatterplot with the infamous Iris dataset and I can even reference to the figure automatically like this, `Figure \@ref(fig:irisfigure)`, Figure \@ref(fig:irisfigure).
 
 ```{r, irisfigure, fig.cap='Here is a caption for the figure. This can be added by using the "fig.cap" option in the r code chunk options, see this [link](https://yihui.name/knitr/options/#plots) from the legend himself, [Yihui Xie](https://twitter.com/xieyihui).', out.width="80%"}
 par(mar=c(2,2,0,1))
@@ -90,9 +101,7 @@ plot(x = iris$Sepal.Length, y = iris$Sepal.Width,
 Maybe you want to show off some of that fancy code you spent so much time on to make that figure, well you can do that too! Just use the `echo=TRUE` option in the r code chunk options, Figure \@ref(fig:myprettycode)!
 
 ```{r myprettycode, echo=TRUE, fig.cap='Boxplots, so hot right now!', fig.height=6, out.width="80%"}
-#trim whitespace
 par(mar=c(2,2,0,0))
-#plot boxplots
 boxplot(iris$Sepal.Width~iris$Species,
         col = "#008080", 
         border = "#0b4545",
@@ -102,6 +111,11 @@ boxplot(iris$Sepal.Width~iris$Species,
 
 :::
 ::::::
+
+
+```{r, sDRI, fig.align='center'}
+knitr::include_graphics("PNG/sDRI.png")
+```
 
 
 # References
