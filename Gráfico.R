@@ -1,12 +1,31 @@
 municipios$riesgo_clm_sPCA_EN <- factor(municipios$riesgo_clm_sPCA,
                                         labels = c("No risk", "Low risk", "Medium risk",
                                         "High risk"))
+png(filename = "sDRI.png", width = 9216, height = 9216, units = "px", res = 1200,
+    bg = )
+ggplot(data = municipios) +
+  geom_sf(aes(fill = riesgo_clm_sPCA_EN), colour = "grey") +
+  scale_fill_discrete(type = colores_riesgo_azul) +
+  ggtitle(label = "Depopulation risk in Castilla-La Mancha (sDRI indicator)") +
+  theme(legend.position="bottom") +
+  easy_add_legend_title("Risk: ")
+dev.off()
+
+png(filename = "tasa_crec_dem.png", width = 9000, height = 7000, units = "px", res = 1200)
+ggplot(data = municipios) +
+  geom_sf(aes(fill = datos$riesgo_CLM_EN), colour = "grey") +
+  scale_fill_discrete(type = gama_JCCM) +
+  easy_add_legend_title("Type of zone: ")
+dev.off()
+
+
 grafA <- ggplot(data = municipios) +
   geom_sf(aes(fill = riesgo_clm_sPCA_EN), colour = "grey") +
-  scale_fill_discrete(type = colores_riesgo) +
+  scale_fill_discrete(type = colores_riesgo_azul) +
   geom_sf(data = nucleos, col = "grey", size = .001) +
   ggtitle(label = "Depopulation risk in Castilla-La Mancha",
           subtitle = "(sDRI indicator)") +
+  theme(legend.position="bottom") +
   easy_add_legend_title("Risk: ")
 
 grafB <- ggplot(data = municipios) +

@@ -21,8 +21,8 @@ output:
     pandoc_args: --mathjax
     highlight: espresso
     number_sections: false
+    link-citations: true
 bibliography: XIJornadasDoctorado.bib
-link-citations: true
 ---
 
 ```{r, include=FALSE}
@@ -34,28 +34,33 @@ knitr::opts_chunk$set(echo = FALSE,
                       out.width = "100%")
 options(knitr.table.format = "html") 
 ```
-:::: {.gridContainer}
 
-::: {.col_1}
-
-
+::: gridContainer
+::: col_1
 # Introduction
 
-:::::: {.columns}
+::: columns
 ::: {.column width="45%"}
-Did you know that some areas of Cuenca y Guadalajara have `a lower population density than Siberia`?
+Did you know that some areas of Cuenca y Guadalajara have ***a lower population density than Siberia*** (see Figure \@ref(fig:Baikal))?
 :::
+
 ::: {.column width="55%"}
-```{r, figura_1, out.width="90%", fig.align='center'}
+```{r, Baikal, out.width="80%", fig.align='center', fig.cap="Baikal Lake at Siberia"}
 knitr::include_graphics("PNG/Baikal.jpg")
 ```
 :::
-::::::
+:::
 
+
+In fact, Figure \@ref(fig:tasacrecdem) shows that ***444 municipalities*** of our region ***lost more than 20% of their population*** in the last two decades (Extreme Risk Zones in red):
+
+```{r, tasacrecdem, fig.align = 'center', fig.cap = "Zones of Castilla-La Mancha Counter-depopulation Strategy", fig.id = TRUE}
+knitr::include_graphics("PNG/tasa_crec_dem.png")
+```
 
 # Objectives
 
--   [**General**](): Construction of a Spatial Depopulation Risk Index using spatial Principal Component Analysis to ranking the municipalities of Castilla-La Mancha 
+-   [**General**](): Construction of a Spatial Depopulation Risk Index using spatial Principal Component Analysis to ranking the municipalities of Castilla-La Mancha
 -   [**Secondaries**]():
     -   to detect spatial dependence of depopulation in Castilla-La Mancha
     -   to calculate the range of the spatial dependence
@@ -70,61 +75,37 @@ $$
 I= \frac{N}{\sum _{i}\sum _{j} w_{ij}} \frac {\sum _{i}\sum _{j} w_{ij} (X_i - \bar{X}) (X_j - \bar{X})} {\sum _{i} (X_i - \bar{X})^2}
 $$
 
-Range of spatial dependence is extracted from the semivariogram, the heart of Geostatistics, which is a tool that catch the spatial dependence according to the distance.
+Range of spatial dependence is extracted from the semivariogram, the heart of Geostatistics, which is a tool that catch the spatial dependence according to the distance (see  Figure \@ref(fig:semivariogram)):
 
-```{r, figura_2, out.width="95%", fig.align='center'}
+```{r, semivariogram, out.width="95%", fig.align='center', fig.cap="The semivariogram is the heart of Geostatistics"}
 knitr::include_graphics("PNG/Semivariogram.png")
 ```
-
-
 :::
 
-::: {.col_2}
-
+::: col_2
 # Results
 
-:::::: {.columns}
+::: columns
 ::: {.column width="50%"}
-
-
 ```{r, irisfigure, fig.cap='Here is a caption for the figure. This can be added by using the "fig.cap" option in the r code chunk options, see this [link](https://yihui.name/knitr/options/#plots) from the legend himself, [Yihui Xie](https://twitter.com/xieyihui).', out.width="80%"}
 par(mar=c(2,2,0,1))
 plot(x = iris$Sepal.Length, y = iris$Sepal.Width,
      col = iris$Species, pch = 19, xlab = "Sepal Length",
      ylab = "Sepal Width")
 ```
-
 :::
 
 ::: {.column width="50%"}
-
 Maybe you want to show off some of that fancy code you spent so much time on to make that figure, well you can do that too! Just use the `echo=TRUE` option in the r code chunk options, Figure \@ref(fig:myprettycode)!
-
-```{r myprettycode, echo=TRUE, fig.cap='Boxplots, so hot right now!', fig.height=6, out.width="80%"}
-par(mar=c(2,2,0,0))
-boxplot(iris$Sepal.Width~iris$Species,
-        col = "#008080", 
-        border = "#0b4545",
-        ylab = "Sepal Width (cm)",
-        xlab = "Species")
-```
-
 :::
-::::::
+:::
 
-
-```{r, sDRI, fig.align='center'}
+```{r, sDRI, out.width="90%", fig.align='center'}
 knitr::include_graphics("PNG/sDRI.png")
 ```
-
 
 # References
 
 Jombart, T.; Devillard, S.; Dufour, A.-B.; Pontier, D. *Revealing cryptic spatial patterns in genetic variability by a new multivariate method*, Heredity, 101 (2008), 92-103.
-
-
 :::
-
-::::
-
-
+:::
