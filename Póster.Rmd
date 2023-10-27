@@ -1,6 +1,10 @@
 ---
-main_topsize: 0.1 #percent coverage of the poster
-main_bottomsize: 0.03
+main_topsize: 0.1 # multiplicador de la altura del póster
+main_bottomsize: 0.03 # multiplicador de la altura del póster
+body_textsize: "30px"
+caption_textsize: "20px"
+reference_textsize: "20px"
+
 #ESSENTIALS
 title: '**Design of a Spatial Depopulation Risk Indicator**'
 author:
@@ -8,7 +12,7 @@ author:
     main: true
 Way:
 main_findings:
-  - "**Depopulation Risk in Castilla-La Mancha**"
+  - '![](PNG/graphicalAbstract.png){.main_pic}'
 logoleft_name: PNG/UCLM.png
 logoright_name: PNG/RepoGitHub.png
 column_numbers: 1
@@ -17,14 +21,13 @@ poster_width: "33.1in"
 css: particularidades.css
 output: 
   posterdown::posterdown_betterport:
-    self_contained: false
+    self_contained: true
     pandoc_args: --mathjax
     highlight: espresso
     number_sections: false
     link-citations: true
 bibliography: XIJornadasDoctorado.bib
 ---
-
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE,
@@ -34,38 +37,31 @@ knitr::opts_chunk$set(echo = FALSE,
                       out.width = "100%")
 options(knitr.table.format = "html") 
 ```
-
 ::: gridContainer
 ::: col_1
-# Introduction
-
+# Motivation
 ::: columns
-::: {.column width="45%"}
-Did you know that some areas of Cuenca y Guadalajara have ***a lower population density than Siberia*** (see Figure \@ref(fig:Baikal))?
+::: {.column width="85%"}
+Did you know that some areas of Cuenca y Guadalajara have **a lower population density than Siberia**?
 :::
-
-::: {.column width="55%"}
-```{r, Baikal, out.width="80%", fig.align='center', fig.cap="Baikal Lake at Siberia"}
-knitr::include_graphics("PNG/Baikal.jpg")
+::: {.column width="15%"}
+```{r, admir, out.width="85%", fig.align='center'}
+knitr::include_graphics("PNG/!.png")
 ```
 :::
 :::
-
-
-In fact, Figure \@ref(fig:tasacrecdem) shows that ***444 municipalities*** of our region ***lost more than 20% of their population*** in the last two decades (Extreme Risk Zones in red):
-
-```{r, tasacrecdem, fig.align = 'center', fig.cap = "Zones of Castilla-La Mancha Counter-depopulation Strategy", fig.id = TRUE}
+Figure \@ref(fig:tasacrecdem) shows that **444 municipalities** of our region **lost more than 20% of their population** in the last two decades (in red):
+```{r, tasacrecdem, fig.align = 'center', fig.cap = "Population Growth in municipalities of Castilla-La Mancha between 2001 and 2020", fig.id = TRUE}
 knitr::include_graphics("PNG/tasa_crec_dem.png")
 ```
-
 # Objectives
 
--   [**General**](): Construction of a Spatial Depopulation Risk Index using spatial Principal Component Analysis to ranking the municipalities of Castilla-La Mancha
+-   [**General**](): The Construction of a Spatial Depopulation Risk Index (sDRI) using spatial Principal Component Analysis to ranking the municipalities of Castilla-La Mancha.
 -   [**Secondaries**]():
-    -   to detect spatial dependence of depopulation in Castilla-La Mancha
-    -   to calculate the range of the spatial dependence
-    -   to include the spatial dependence in a depopulation risk index
-    -   to rank the municipalities of Castilla-La Mancha in terms of risk depopulation in order to identify areas in which counter-measures can be applied
+    -   To detect spatial dependence of depopulation in Castilla-La Mancha.
+    -   To calculate the range of the spatial dependence.
+    -   To include the spatial dependence in a depopulation risk index.
+    -   To rank the municipalities of Castilla-La Mancha in terms of risk depopulation in order to identify areas in which counter-measures can be applied.
 
 # Methods
 
@@ -75,9 +71,9 @@ $$
 I= \frac{N}{\sum _{i}\sum _{j} w_{ij}} \frac {\sum _{i}\sum _{j} w_{ij} (X_i - \bar{X}) (X_j - \bar{X})} {\sum _{i} (X_i - \bar{X})^2}
 $$
 
-Range of spatial dependence is extracted from the semivariogram, the heart of Geostatistics, which is a tool that catch the spatial dependence according to the distance (see  Figure \@ref(fig:semivariogram)):
+Range of spatial dependence is extracted from the semivariogram, the heart of Geostatistics, which is a tool that catch the spatial dependence according to the distance (see  Figure \@ref(fig:semivariogram)).
 
-```{r, semivariogram, out.width="95%", fig.align='center', fig.cap="The semivariogram is the heart of Geostatistics"}
+```{r, semivariogram, out.width="95%", fig.align='center', fig.cap="Components of a semivariogram"}
 knitr::include_graphics("PNG/Semivariogram.png")
 ```
 :::
@@ -86,21 +82,28 @@ knitr::include_graphics("PNG/Semivariogram.png")
 # Results
 
 ::: columns
-::: {.column width="50%"}
-```{r, irisfigure, fig.cap='Here is a caption for the figure. This can be added by using the "fig.cap" option in the r code chunk options, see this [link](https://yihui.name/knitr/options/#plots) from the legend himself, [Yihui Xie](https://twitter.com/xieyihui).', out.width="80%"}
-par(mar=c(2,2,0,1))
-plot(x = iris$Sepal.Length, y = iris$Sepal.Width,
-     col = iris$Species, pch = 19, xlab = "Sepal Length",
-     ylab = "Sepal Width")
+::: {.column width="45%"}
+Ideas:
+
++ Data
+
++ Mapa de sPCA dependencia y autovalores 
+
++ Lollipop
+:::
+
+::: {.column width="10%"}
+```{r, blanco, out.width="10%"}
+knitr::include_graphics("PNG/blanco.png")
 ```
 :::
 
-::: {.column width="50%"}
-Maybe you want to show off some of that fancy code you spent so much time on to make that figure, well you can do that too! Just use the `echo=TRUE` option in the r code chunk options, Figure \@ref(fig:myprettycode)!
+::: {.column width="45%"}
+
 :::
 :::
 
-```{r, sDRI, out.width="90%", fig.align='center'}
+```{r, sDRI, out.width="90%", fig.align='center', fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI Indicator"}
 knitr::include_graphics("PNG/sDRI.png")
 ```
 
