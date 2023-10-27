@@ -1,9 +1,9 @@
 ---
 main_topsize: 0.1 # multiplicador de la altura del póster
 main_bottomsize: 0.03 # multiplicador de la altura del póster
-body_textsize: "35px"
-caption_textsize: "20px"
-reference_textsize: "20px"
+body_textsize: "36px"
+caption_textsize: "24px"
+reference_textsize: "24px"
 
 #ESSENTIALS
 title: '**Design of a Spatial Depopulation Risk Indicator**'
@@ -39,21 +39,26 @@ options(knitr.table.format = "html")
 ```
 ::: gridContainer
 ::: col_1
-# Motivation
+# Abstract - Motivation
 ::: columns
-::: {.column width="85%"}
-Did you know that some areas of Cuenca y Guadalajara have **a lower population density than Siberia**?
+::: {.column width="88%"}
+Did you know that some areas of Cuenca y Guadalajara have **a lower population density than Siberia**? Depopulation is a major problem in rural areas of Castilla-La Mancha.
 :::
-::: {.column width="15%"}
-```{r, admir, out.width="85%", fig.align='center'}
+::: {.column width="12%"}
+```{r, admir, out.width="83%", fig.align='center'}
 knitr::include_graphics("PNG/!.png")
 ```
 :::
 :::
-Figure \@ref(fig:tasacrecdem) shows that **444 municipalities** of our region **lost more than 20% of their population** in the last two decades (in red):
-```{r, tasacrecdem, fig.align = 'center', fig.cap = "Population Growth in municipalities of Castilla-La Mancha between 2001 and 2020", fig.id = TRUE}
-knitr::include_graphics("PNG/tasa_crec_dem.png")
+Table \@ref(tab:tabla) shows that **445 municipalities** of the region **lost more than 20% of their population**, whereas only 237 municipalities improved it in the last two decades (2001-2020).
+
+```{r tabla}
+datos <- data.frame(population = c("loss >20%", "loss 10-20%", "loss 5-10%", "loss <5%", "gain <5%", "gain 5-20%", "gain >20%"), municipalities = c(445, 131, 62, 44, 43, 67, 127))
+knitr::kable(datos, caption = 'Number of municipalities according to growth rate between 2001 and 2020', align = c('l', 'r'),"html")
 ```
+In this work a Spatial Depopulation Risk Index is constructed for the 919 municipalities of Castilla-La Mancha, using geostatistical techniques and principal component analysis.
+The identification of areas with depopulation risk will allow for applying counter-measures.
+
 # Objectives
 
 -   [**General**](): The Construction of a Spatial Depopulation Risk Index (sDRI) using spatial Principal Component Analysis to ranking the municipalities of Castilla-La Mancha.
@@ -76,6 +81,12 @@ Range of spatial dependence is extracted from the semivariogram, the heart of Ge
 ```{r, semivariogram, out.width="95%", fig.align='center', fig.cap="Components of a semivariogram"}
 knitr::include_graphics("PNG/Semivariogram.png")
 ```
+Based on the calculated range of spatial dependence, a neighborhood network is constructed. Then a spatial principal component analysis (sPCA) is applied to a set of demographic variables. Figure \@ref(fig:dependence) shows the extreme theoretical posibilities. The last step is extracting and scaling the first principal component of the sPCA.
+
+```{r, dependence, fig.align = 'center', fig.cap = "Theoretical cases: (a) spatial dependence, (b) no spatial dependence", fig.id = TRUE}
+knitr::include_graphics("PNG/sACP.png")
+```
+
 :::
 
 ::: col_2
@@ -104,7 +115,7 @@ knitr::include_graphics("PNG/blanco.png")
 :::
 
 ```{r, sDRI, out.width="90%", fig.align='center', fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI Indicator"}
-knitr::include_graphics("PNG/sDRI.png")
+knitr::include_graphics("PNG/sDRI_fondo.png")
 ```
 
 # References

@@ -1,13 +1,14 @@
+library(ggallin)
 municipios$riesgo_clm_sPCA_EN <- factor(municipios$riesgo_clm_sPCA,
-                                        labels = c("No risk", "Low risk", "Medium risk",
-                                        "High risk"))
-png(filename = "sDRI.png", width = 9216, height = 9216, units = "px", res = 1200,
-    bg = "#DDEDED")
+                                        labels = c("No risk", "Medium risk",
+                                        "High risk", "Extreme Risk"))
+
+png(filename = "sDRI.png", width = 9216, height = 9216, units = "px", res = 1200)
 ggplot(data = municipios) +
-  geom_sf(aes(fill = riesgo_clm_sPCA_EN), colour = "grey") +
-  scale_fill_discrete(type = colores_riesgo_azul) +
+  geom_sf(aes(fill = riesgo_clm_sPCA_EN), colour = gris_muni) +
+  scale_fill_discrete(type = colores_riesgo_viridis) +
+  theme_bw() +
   theme(legend.position="bottom") +
-  theme(plot.background = element_rect(fill = "#DDEDED")) +
   easy_add_legend_title("Depopulation Risk: ")
 dev.off()
 
@@ -21,13 +22,27 @@ tasa_crec <- cut(datos$tasa_crec_dem,
 png(filename = "tasa_crec_dem.png", width = 9000, height = 7000, units = "px", res = 1200)
 ggplot(data = municipios) +
   geom_sf(aes(fill = tasa_crec), color = gris_muni) +
-  scale_fill_discrete(type = gama_JCCM_inv) +
+  scale_fill_discrete(type = gama_viridis) +
+  geom_sf(data = nucleos, col = gris_muni, size = .001) +
+  easy_add_legend_title("Growth Rate: ") +
+  theme_bw()
+dev.off()
+
+
+# Anteriores
+# Viridis tasa de crecimiento demográfico
+png(filename = "tasa_crec_dem.png", width = 9000, height = 7000, units = "px", res = 1200)
+ggplot(data = municipios) +
+  geom_sf(aes(fill = datos$tasa_crec_dem), color = gris_muni) +
+  scale_fill_viridis(trans = pseudolog10_trans) +
+  theme_bw() +
   geom_sf(data = nucleos, col = gris_muni, size = .001) +
   easy_add_legend_title("Growth Rate: ")
 dev.off()
 
 
-# Anteriores
+
+
 grafA <- ggplot(data = municipios) +
   geom_sf(aes(fill = riesgo_clm_sPCA_EN), colour = "grey") +
   scale_fill_discrete(type = colores_riesgo_azul) +
