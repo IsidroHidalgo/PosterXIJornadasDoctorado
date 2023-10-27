@@ -14,6 +14,7 @@ Way:
 main_findings:
   - '![](PNG/graphicalAbstract.png){.main_pic}'
 logoleft_name: PNG/UCLM.png
+logocenter_name: PNG/Centro.png
 logoright_name: PNG/RepoGitHub.png
 column_numbers: 1
 poster_height: "46.8in"
@@ -45,7 +46,7 @@ options(knitr.table.format = "html")
 Did you know that some areas of Cuenca y Guadalajara have **a lower population density than Siberia**? Depopulation is a major problem in rural areas of Castilla-La Mancha.
 :::
 ::: {.column width="12%"}
-```{r, admir, out.width="83%", fig.align='center'}
+```{r, admir, out.width="90%", fig.align='center'}
 knitr::include_graphics("PNG/!.png")
 ```
 :::
