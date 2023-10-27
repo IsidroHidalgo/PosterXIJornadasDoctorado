@@ -1,7 +1,7 @@
 ---
 main_topsize: 0.1 # multiplicador de la altura del póster
 main_bottomsize: 0.03 # multiplicador de la altura del póster
-body_textsize: "30px"
+body_textsize: "35px"
 caption_textsize: "20px"
 reference_textsize: "20px"
 
