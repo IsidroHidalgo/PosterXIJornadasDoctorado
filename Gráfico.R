@@ -28,55 +28,35 @@ ggplot(data = municipios) +
   theme_bw()
 dev.off()
 
-
-# Anteriores
-# Viridis tasa de crecimiento demográfico
-png(filename = "tasa_crec_dem.png", width = 9000, height = 7000, units = "px", res = 1200)
-ggplot(data = municipios) +
-  geom_sf(aes(fill = datos$tasa_crec_dem), color = gris_muni) +
-  scale_fill_viridis(trans = pseudolog10_trans) +
-  theme_bw() +
-  geom_sf(data = nucleos, col = gris_muni, size = .001) +
-  easy_add_legend_title("Growth Rate: ")
+png(filename = "result_1.png", width = 5100, height = 3400, units = "px", res = 600)
+plot(semivariograma, col= azul, xlab= "distance(m)", ylab= "semivariance",
+     pch= 19, main = "(a)", col.lab = azul, col.axis = azul)
+lines.variomodel(cov.model= "sph", cov.pars= c(1751.889, 64820.44), lw = 3,
+                 nug= 1677.458, max.dist= 80000, col= naranja, lty= "dashed")
 dev.off()
 
 
+png(filename = "result_2.png", width = 5100, height = 3400, units = "px", res = 600)
+barplot(fit_sACP$eig, main = "(b)",
+        col = spectral(12), names.arg = varianza, xaxs = "i", cex.names = .75,
+        xlab = "explained variance", col.lab = azul, col.axis = azul,
+        cex.axis = .75)
+dev.off()
 
+png(filename = "result_3.png", width = 15300, height = 10200, units = "px", res = 600)
+plot(fit_sACP, main = "(c)", col.lab = azul, col.axis = azul)
+dev.off()
 
-grafA <- ggplot(data = municipios) +
-  geom_sf(aes(fill = riesgo_clm_sPCA_EN), colour = "grey") +
-  scale_fill_discrete(type = colores_riesgo_azul) +
-  geom_sf(data = nucleos, col = "grey", size = .001) +
-  ggtitle(label = "Depopulation risk in Castilla-La Mancha",
-          subtitle = "(sDRI indicator)") +
-  theme(legend.position="bottom") +
-  easy_add_legend_title("Risk: ")
-
-grafB <- ggplot(data = municipios) +
-  geom_sf(aes(fill = datos$riesgo_CLM_EN), colour = "grey") +
-  scale_fill_discrete(type = gama_JCCM) +
-  geom_sf(data = nucleos, col = "grey", size = .001) +
-  ggtitle(label = "",
-          subtitle = "(Counter-depopulation strategy)") +
-  easy_add_legend_title("Type of zone: ")
-
-ggarrange(grafA, grafB, widths = c(1, 1.08))
-
-# En español:
-grafC <- ggplot(data = municipios) +
-  geom_sf(aes(fill = riesgo_clm_sACP), colour = "grey") +
-  scale_fill_discrete(type = colores_riesgo) +
-  geom_sf(data = nucleos, col = "grey", size = .001) +
-  ggtitle(label = "Riesgo de despoblamiento en CLM",
-          subtitle = "(Según indicador sACP60km)") +
-  easy_add_legend_title("Riesgo: ")
-
-grafD <- ggplot(data = municipios) +
-  geom_sf(aes(fill = datos$riesgo_CLM), colour = "grey") +
-  scale_fill_discrete(type = gama_JCCM) +
-  geom_sf(data = nucleos, col = "grey", size = .001) +
-  ggtitle(label = "",
-          subtitle = "(Estrategia contra la despoblación)") +
-  easy_add_legend_title("Tipo de zona: ")
-
-ggarrange(grafC, grafD, widths = c(1, 1.05))
+png(filename = "result_4.png", width = 5100, height = 3400, units = "px", res = 600)
+ggplot(lollipop, aes(x = reorder(name, indicador), y = indicador)) +
+  geom_segment(aes(x = reorder(name, indicador),
+                   xend = reorder(name, indicador),
+                   y = 0, yend = indicador),
+               color = "gray", lwd = 1) +
+  geom_point(size = 7.5, pch = 21, bg = 4, col = 1) +
+  geom_text(aes(label = indicador), color = "white", size = 3) +
+  coord_flip() +
+  xlab("") +
+  ylab("") +
+  theme_minimal()
+dev.off()
