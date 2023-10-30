@@ -62,12 +62,12 @@ knitr::kable(datos, caption = 'Number of municipalities according to growth rate
 
 # Objectives
 
--   [**General**](): The Construction of a Spatial Depopulation Risk Index (sDRI) using spatial Principal Component Analysis to ranking the municipalities of Castilla-La Mancha.
+-   [**General**](): The Construction of a Spatial Depopulation Risk Index (sDRI) using spatial Principal Component Analysis to ranking the municipalities of Castilla-La Mancha in order to identify areas in which counter-measures can be applied.
 -   [**Secondaries**]():
     -   To detect spatial dependence of depopulation in Castilla-La Mancha.
     -   To calculate the range of the spatial dependence.
     -   To include the spatial dependence in a depopulation risk index.
-    -   To rank the municipalities of Castilla-La Mancha in terms of risk depopulation in order to identify areas in which counter-measures can be applied.
+    -   To rank the municipalities of Castilla-La Mancha in terms of risk depopulation.
 
 # Methods
 
@@ -79,13 +79,13 @@ $$
 
 Range of spatial dependence is extracted from the semivariogram, the heart of Geostatistics [**(Montero et al., 2015)**](), which is a tool that catch the spatial dependence according to the distance (see  Figure \@ref(fig:semivariogram)).
 
-```{r, semivariogram, out.width="95%", fig.align='center', fig.cap="Components of a semivariogram"}
+```{r, semivariogram, out.width="90%", fig.align='center', fig.cap="Components of a semivariogram"}
 knitr::include_graphics("PNG/Semivariogram.png")
 ```
 Based on the calculated range of spatial dependence, a neighborhood network is constructed. Then a spatial principal component analysis [**(Jombart et al., 2008)**]() is applied to a set of demographic variables [**(Jato-Espino & Mayor-Vitoria et al., 2023)**](). Figure \@ref(fig:dependence) shows the extreme theoretical posibilities. The last step is extracting and scaling the first principal component of the sPCA.
 
 ```{r, dependence, fig.align = 'center', fig.cap = "Theoretical cases: (a) spatial dependence, (b) no spatial dependence", fig.id = TRUE}
-knitr::include_graphics("PNG/sACP.png")
+knitr::include_graphics("PNG/sACP_color.png")
 ```
 
 :::
@@ -96,7 +96,7 @@ knitr::include_graphics("PNG/sACP.png")
 ::: columns
 ::: {.column width="59%"}
 ```{r, resultados, fig.align = 'center', fig.cap = "Principal results of spatial principal component analysis (range: 60km): (a) Semivariogram; (b) Eigenvalues of sACP; (c) sPCA scores of municipalities; (d) Indicator of extreme municipalities", fig.id = TRUE}
-knitr::include_graphics("PNG/Results.png")
+knitr::include_graphics("PNG/Results_color.png")
 ```
 
 :::
