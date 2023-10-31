@@ -77,11 +77,9 @@ knitr::kable(datos, col.names = c("Population Growth Rate", "Number of Municipal
 
 # Methods
 
-As stated in the First Law of Geography: "Everything is related to everything else, but near things are more related than distant things" [**(Tobler, 1970)**](). Range of spatial dependence is extracted from the semivariogram, the heart of Geostatistics [**(Montero et al., 2015)**](), which is a tool that catch the variability, hence the spatial dependence according to the distance (see Figure \@ref(fig:fig1)). The formula of the semivariogram $\gamma(s_i,s_j)$ is:
-$$
+As stated in the First Law of Geography: "Everything is related to everything else, but near things are more related than distant things" [**(Tobler, 1970)**](). Range of spatial dependence is extracted from the semivariogram, the heart of Geostatistics [**(Montero et al., 2015)**](), which is a tool that catch the variability, hence the spatial dependence according to the distance (see Figure \@ref(fig:fig1)). The formula of the semivariogram $\gamma(s_i,s_j)$ is: $$
 \gamma(s_i-s_j) = \frac{1}{2}V((s_i)-Z(s_j)), \forall s_i,s_j\in D
-$$
-where: $s_i$ and $s_j$ are two locations of domain $D$, $V$ is the variance, and $Z(s)$ is the random variable of study at location $s$ (Population Growth Rate in this work).
+$$ where: $s_i$ and $s_j$ are two locations of domain $D$, $V$ is the variance, and $Z(s)$ is the random variable of study at location $s$ (Population Growth Rate in this work).
 
 ```{r, fig1, out.width="90%", fig.align='center', fig.cap="Components of a semivariogram"}
 knitr::include_graphics("PNG/Fig 1 - Semivariogram.png")
@@ -105,10 +103,14 @@ knitr::include_graphics("PNG/Fig 2 - sACP.png")
 # Results
 
 ::: columns
-::: {.column width="30%"}
-Figure \@ref(fig:fig3) shows the adjusted semivariogram to a spherical model, resulting in a range of 60 km for the spatial dependence, a sill of 3419 and a nugget of 1667.
+::: {.column width="40%"}
+Figure \@ref(fig:fig3) shows the adjusted semivariogram to a spherical model, resulting in the following parameters:
 
-Therefore, the calculated range of spatial dependence is of around one-sixth of the regional limits.
+\- [**range**](): 60000 meters (60 km) for the spatial dependence (around one-sixth of the regional limits),
+
+\- [**sill**](): 3419, and
+
+\- [**nugget**](): 1667.
 
 ```{r, fig3, fig.align = 'center', fig.cap = "Semivariogram", fig.id = TRUE}
 knitr::include_graphics("PNG/Fig 3 - Semivariogram.png")
@@ -121,23 +123,17 @@ knitr::include_graphics("PNG/Blanco.png")
 ```
 :::
 
-::: {.column width="68%"}
-```{r, fig4,out.width = "90%", fig.align = 'center', fig.cap = "Principal results of spatial principal component analysis (range: 60km): (a) Eigenvalues of sPCA; (b) Map of sPCA scores of municipalities.", fig.id = TRUE}
+::: {.column width="58%"}
+```{r, fig4, fig.align = 'center', fig.cap = "Principal results of spatial principal component analysis: (a) Eigenvalues of sPCA; (b) Map of sPCA scores of municipalities.", fig.id = TRUE}
 knitr::include_graphics("PNG/Fig 4 - sPCA.png")
 ```
-Figure \@ref(fig:fig4) shows the main results of the spatial analysis of principal components of depopulation in Castilla-La Mancha. The first two eigenvalues of sPCA (\@ref(fig:fig4)[a]()) show a strong global spatial dependence, whereas the last negatives eigenvalues reveal some local dependence; this is due to municipalities acting as development hubs, consequently earning population of neighbours. The sPCA map (\@ref(fig:fig4)[b]()) shows three big areas of depopulation; namely the counties of Cuenca and Guadalajara, the west and the south of the region.
+
+The main results of the spatial analysis of principal components of depopulation in Castilla-La Mancha are shown in Figure \@ref(fig:fig4).
+
+The first two eigenvalues of sPCA (\@ref(fig:fig4)[a]()) show a strong global spatial dependence, whereas the last negatives eigenvalues reveal some local dependence; this is due to municipalities acting as development hubs, consequently earning population of neighbours.
+
+In the sPCA map (\@ref(fig:fig4)[b]()) three big areas of depopulation appear; namely the counties of Cuenca and Guadalajara, the west and the south of the region.
 :::
-.
-
-.
-
-.
-
-.
-
-.
-
-.
 
 Finally, the sDRI (\@ref(fig:fig5)) is extracted from the first component of sPCA and scaled from 0 to 100. Municipalities are then classified from Albacete (sDRI = 0) to Arandilla del Arroyo (sDRI = 100). \@ref(fig:fig6) represents the sDRI in a map of Castilla-La Mancha.
 
@@ -158,7 +154,7 @@ knitr::include_graphics("PNG/Fig 6 - sDRI.png")
 
 # Conclusions & Discussion
 
-The applied spatial principal component analysis results in a Depopulation Risk Index which identifies numerous areas as having a medium to high risk of depopulation; namely, the majority of villages of Cuenca and Guadalajara, and the west and the south of the region. Conversely, it shows no risk for the areas of La Mancha and the Sagra and Henares industrial corridors, as well as the provincial capitals, Talavera de la Reina and Puertollano (see Figure nº \@ref(fig:sDRI)).
+The applied spatial principal component analysis results in a Depopulation Risk Index which identifies numerous areas as having a medium to high risk of depopulation; namely, the majority of villages of Cuenca and Guadalajara, and the west and the south of the region. Conversely, it shows no risk for the areas of La Mancha and the Sagra and Henares industrial corridors, as well as the provincial capitals, Talavera de la Reina and Puertollano (see Figure nº \@ref(fig:fig6)).
 
 We can conclude that Spatial Principal Component Analysis (sPCA) can be applied to demographic variables to construct an index to classify the municipalities of Castilla-La Mancha according to their depopulation risk.
 
