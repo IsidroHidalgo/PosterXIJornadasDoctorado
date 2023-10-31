@@ -1,3 +1,19 @@
+ggplot(data = municipios) +
+  geom_sf(fill="#30AF80", colour = gris_muni) + theme_bw() +
+  theme(panel.grid.major = element_line(colour = 'transparent'))
+
+png(filename = "Lollipop.png", width = 8000, height = 5600, units = "px", res = 1200)
+ggplot(lollipop, aes(x = reorder(name, indicador), y = indicador)) +
+  geom_segment(aes(x = reorder(name, indicador),
+                   xend = reorder(name, indicador),
+                   y = 0, yend = indicador),
+               color = lollipop$cpro, lwd = 1) +
+  geom_point(size = 7.5, pch = 21, bg = lollipop$cpro, col = 1) +
+  geom_text(aes(label = indicador),
+            color = c(rep("white", 13), rep("black", 7)), size = 3) +
+  coord_flip() + xlab("") + ylab("")
+dev.off()
+
 library(ggallin)
 municipios$riesgo_clm_sPCA_EN <- factor(municipios$riesgo_clm_sPCA,
                                         labels = c("No risk", "Medium risk",
