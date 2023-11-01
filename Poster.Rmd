@@ -82,7 +82,7 @@ As stated in the First Law of Geography: "Everything is related to everything el
 $$ where: $s_i$ and $s_j$ are two locations of domain $D$, $V$ is the variance, and $Z(s)$ is the random variable of study at location $s$ (Population Growth Rate in this work).
 
 ```{r, fig1, out.width="90%", fig.align='center', dpi=1200, fig.cap="Components of a semivariogram"}
-knitr::include_graphics("PNG/Fig 1 - Semivariogram.png")
+knitr::include_graphics("PNG/Fig1-Semivariogram.png")
 ```
 
 Based on the adjusted range of spatial dependence, a neighbourhood network is constructed in the form of a proximity matrix $L$. Then a spatial principal component analysis [**(Jombart, T. et al., 2008)**]() is applied to ten demographic variables [**(Jato-Espino & Mayor-Vitoria, 2023)**](): population in 2001, population in 2020, youth (\<16 years) in 2020, elder (\>64 years) in 2020, growth population (2001-2020), population density (2020), natural increase rate (2010-2020), ageing index (2020), dependence index (2020) and net migration rate (2010-2020).
@@ -108,7 +108,7 @@ Figure \@ref(fig:fig2) shows the extreme theoretical possibilities. The last ste
 
 ::: {.column width="58%"}
 ```{r, fig2, out.width="95%", fig.align = 'center', dpi=1200, fig.cap = "Theoretical cases: (a) spatial dependence, (b) no spatial dependence", fig.id = TRUE}
-knitr::include_graphics("PNG/Fig 2 - sACP.png")
+knitr::include_graphics("PNG/Fig2-sACP.png")
 ```
 :::
 :::
@@ -126,7 +126,7 @@ Figure \@ref(fig:fig3) shows the adjusted semivariogram to a spherical model, re
 \- [**nugget**](): 1667.
 
 ```{r, fig3, fig.align = 'center', dpi=1200, fig.cap = "Semivariogram", fig.id = TRUE}
-knitr::include_graphics("PNG/Fig 3 - Semivariogram.png")
+knitr::include_graphics("PNG/Fig3-Semivariogram.png")
 ```
 :::
 
@@ -138,7 +138,7 @@ knitr::include_graphics("PNG/Blanco.png")
 
 ::: {.column width="58%"}
 ```{r, fig4, fig.align = 'center', dpi=1200, fig.cap = "Principal results of spatial principal component analysis: (a) Eigenvalues of sPCA; (b) Map of sPCA scores of municipalities.", fig.id = TRUE}
-knitr::include_graphics("PNG/Fig 4 - sPCA.png")
+knitr::include_graphics("PNG/Fig4-sPCA.png")
 ```
 
 The main results of the spatial analysis of principal components of depopulation in Castilla-La Mancha are shown in Figure \@ref(fig:fig4).
@@ -148,27 +148,17 @@ The first two eigenvalues of sPCA (\@ref(fig:fig4)[a]()) show a strong global sp
 In the sPCA map (\@ref(fig:fig4)[b]()) three big areas of depopulation appear; namely the counties of Cuenca and Guadalajara, the west and the south of the region.
 :::
 
-Finally, the sDRI (\@ref(fig:fig5)) is extracted from the first component of sPCA and scaled from 0 to 100. Municipalities are then classified from Albacete (sDRI = 0) to Arandilla del Arroyo (sDRI = 100). \@ref(fig:fig6) represents the sDRI in a map of Castilla-La Mancha.
+Finally, the sDRI (\@ref(fig:fig5)) is extracted from the first component of sPCA and scaled from 0 to 100. Municipalities are then classified from Albacete (sDRI = 0) to Arandilla del Arroyo (sDRI = 100). In addition, Figure \@ref(fig:fig5) represents the sDRI in a map of Castilla-La Mancha.
 :::
 
-::: columns
-::: {.column width="40%"}
 ```{r, fig5, fig.align='center', out.width="92%", dpi=1200, fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI"}
-knitr::include_graphics("PNG/Fig 5 - Lollipop.png")
+knitr::include_graphics("PNG/Fig5-Lollipop-sDRI.png")
 ```
-:::
-
-::: {.column width="60%"}
-```{r, fig6, out.width="94%", fig.align='center', dpi=1200, fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI"}
-knitr::include_graphics("PNG/Fig 6 - sDRI.png")
-```
-:::
-:::
 
 
 # Conclusions & Discussion
 
-The applied spatial principal component analysis results in a Depopulation Risk Index which identifies numerous areas as having a medium to high risk of depopulation; namely, the majority of villages of Cuenca and Guadalajara, and the west and the south of the region. Conversely, it shows no risk for the areas of La Mancha and the Sagra and Henares industrial corridors, as well as the provincial capitals, Talavera de la Reina and Puertollano (see Figure nº \@ref(fig:fig6)).
+The applied spatial principal component analysis results in a Depopulation Risk Index which identifies numerous areas as having a medium to high risk of depopulation; namely, the majority of villages of Cuenca and Guadalajara, and the west and the south of the region. Conversely, it shows no risk for the areas of La Mancha and the Sagra and Henares industrial corridors, as well as the provincial capitals, Talavera de la Reina and Puertollano (see Figure \@ref(fig:fig5)).
 
 We can conclude that Spatial Principal Component Analysis (sPCA) can be applied to demographic variables to construct an index to classify the municipalities of Castilla-La Mancha according to their depopulation risk. The scores of sDRI can be integrated into an expert system capable of identifying the areas in which counter-measures can be applied by local and regional governments.
 

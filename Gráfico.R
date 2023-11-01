@@ -3,9 +3,14 @@ ggplot(data = municipios) +
   theme(panel.grid.major = element_line(colour = 'transparent'))
 
 library(viridis)
+lollipop <- municipios |>
+  mutate(indicador = round(indicador, 1)) |>
+  select(indicador, name, cpro) |>
+  arrange(desc(indicador))
+lollipop <- rbind(head(lollipop, 20), tail(lollipop, 20))
+lollipop$geometry <- NULL
 lollipop$cpro <- viridis(length(lollipop$cpro))
-png(filename = "Fig 5 - Lollipop.png", width = 6072, height = 9216, units = "px", res = 1200)
-ggplot(lollipop, aes(x = reorder(name, indicador), y = indicador)) +
+grafA <- ggplot(lollipop, aes(x = reorder(name, indicador), y = indicador)) +
   geom_segment(aes(x = reorder(name, indicador),
                    xend = reorder(name, indicador),
                    y = 0, yend = indicador),
@@ -14,8 +19,40 @@ ggplot(lollipop, aes(x = reorder(name, indicador), y = indicador)) +
   geom_text(aes(label = indicador),
             color = c(rep("white", 23), rep("black", 17)), size = 3) +
   coord_flip() + xlab("") + ylab("") + ylim(0,100) +
-  theme(plot.margin = unit(c(0.1, 0.1, 0.1, 0.1),"inches"))
+  theme(plot.margin = unit(c(0.28, 0.1, 0.1, 0.1),"inches"))
+municipios$riesgo_clm_sPCA_EN <- factor(municipios$riesgo_clm_sPCA,
+                                        labels = c("No Risk", "Medium Risk",
+                                                   "High Risk", "Extreme Risk"))
+grafB <- ggplot(data = municipios) +
+  geom_sf(aes(fill = riesgo_clm_sPCA_EN), colour = gris_muni) +
+  scale_fill_discrete(type = colores_riesgo_viridis) +
+  theme(legend.position="bottom") +
+  easy_add_legend_title("Depopulation Risk: ")
+
+png(filename = "Fig5-Lollipop-sDRI.png", width = 7644, height = 4608,
+    units = "px", res = 600)
+ggarrange(grafA, grafB, common.legend = TRUE, legend = "bottom", widths = c(1, 1.19))
 dev.off()
+
+png(filename = "ga-sDRI.png", width = 2000, height = 2000,
+    units = "px", res = 600)
+ggplot(data = municipios) +
+  geom_sf(aes(fill = riesgo_clm_sPCA_EN), colour = gris_muni) +
+  scale_fill_discrete(type = colores_riesgo_viridis) +
+  theme(axis.line=element_blank(),
+        axis.text.x=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(),
+        legend.position="none",
+        panel.background = element_rect(fill='transparent'),
+        panel.border=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        plot.background=element_blank())
+dev.off()
+
 
 library(ggallin)
 municipios$riesgo_clm_sPCA_EN <- factor(municipios$riesgo_clm_sPCA,
