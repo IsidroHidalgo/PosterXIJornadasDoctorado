@@ -2,7 +2,9 @@ ggplot(data = municipios) +
   geom_sf(fill="#30AF80", colour = gris_muni) + theme_bw() +
   theme(panel.grid.major = element_line(colour = 'transparent'))
 
-png(filename = "Lollipop.png", width = 8000, height = 5600, units = "px", res = 1200)
+library(viridis)
+lollipop$cpro <- viridis(length(lollipop$cpro))
+png(filename = "Fig 5 - Lollipop.png", width = 6072, height = 9216, units = "px", res = 1200)
 ggplot(lollipop, aes(x = reorder(name, indicador), y = indicador)) +
   geom_segment(aes(x = reorder(name, indicador),
                    xend = reorder(name, indicador),
@@ -10,8 +12,9 @@ ggplot(lollipop, aes(x = reorder(name, indicador), y = indicador)) +
                color = lollipop$cpro, lwd = 1) +
   geom_point(size = 7.5, pch = 21, bg = lollipop$cpro, col = 1) +
   geom_text(aes(label = indicador),
-            color = c(rep("white", 13), rep("black", 7)), size = 3) +
-  coord_flip() + xlab("") + ylab("")
+            color = c(rep("white", 23), rep("black", 17)), size = 3) +
+  coord_flip() + xlab("") + ylab("") + ylim(0,100) +
+  theme(plot.margin = unit(c(0.1, 0.1, 0.1, 0.1),"inches"))
 dev.off()
 
 library(ggallin)

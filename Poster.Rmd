@@ -1,7 +1,7 @@
 ---
 main_topsize: 0.1 # multiplicador de la altura del póster
 main_bottomsize: 0.03 # multiplicador de la altura del póster
-body_textsize: "33px"
+body_textsize: "31px"
 caption_textsize: "22px"
 reference_textsize: "22px"
 
@@ -81,25 +81,38 @@ As stated in the First Law of Geography: "Everything is related to everything el
 \gamma(s_i-s_j) = \frac{1}{2}V((s_i)-Z(s_j)), \forall s_i,s_j\in D
 $$ where: $s_i$ and $s_j$ are two locations of domain $D$, $V$ is the variance, and $Z(s)$ is the random variable of study at location $s$ (Population Growth Rate in this work).
 
-```{r, fig1, out.width="90%", fig.align='center', fig.cap="Components of a semivariogram"}
+```{r, fig1, out.width="90%", fig.align='center', dpi=1200, fig.cap="Components of a semivariogram"}
 knitr::include_graphics("PNG/Fig 1 - Semivariogram.png")
 ```
 
-Based on the adjusted range of spatial dependence, a neighbourhood network is constructed. Then a spatial principal component analysis [**(Jombart, T. et al., 2008)**]() is applied to ten demographic variables [**(Jato-Espino & Mayor-Vitoria, 2023)**](): population in 2001, population in 2020, youth (\<16 years) in 2020, elder (\>64 years) in 2020, growth population (2001-2020), population density (2020), natural increase rate (2010-2020), ageing index (2020), dependence index (2020) and net migration rate (2010-2020).
+Based on the adjusted range of spatial dependence, a neighbourhood network is constructed in the form of a proximity matrix $L$. Then a spatial principal component analysis [**(Jombart, T. et al., 2008)**]() is applied to ten demographic variables [**(Jato-Espino & Mayor-Vitoria, 2023)**](): population in 2001, population in 2020, youth (\<16 years) in 2020, elder (\>64 years) in 2020, growth population (2001-2020), population density (2020), natural increase rate (2010-2020), ageing index (2020), dependence index (2020) and net migration rate (2010-2020).
 
-This set of variables define a 10-dimensional space, where Euclidean distances between the 919 entities are calculated. Finding an axis in $R^{10}$ on which the projections of the set of municipalities are as widely scattered as possible, that is, where the Euclidean distances between the entities are best preserved. To fulfil this property, sPCA seeks a scaled vector $u$ with $||u||^2 = 1$, containing 10 loadings (one per variable) so that the entities scores onto this axis ($\phi = Xu$) have a maximum variance. This can be reformulated as the maximization of: $$||Xu||^2_{1/n} = \frac{1}{n}(Xu)^TXu = \frac{1}{n}u^TX^TXu
+This set of variables define a 10-dimensional space, where Euclidean distances between the 919 entities are calculated. Finding an axis in $R^{10}$ on which the projections of the set of municipalities are as widely scattered as possible, that is, where the Euclidean distances between the entities are best preserved. To fulfil this property, a classical PCA seeks a scaled vector $u$ with $||u||^2 = 1$, containing 10 loadings (one per variable) so that the entities scores onto this axis ($\phi = Xu$) have a maximum variance.
+
+This can be reformulated as the maximization of: $$
+||Xu||^2_{1/n} = \frac{1}{n}(Xu)^TXu = \frac{1}{n}u^TX^TXu
 $$
 
 where $||Xu||^2_{1/n} = var(\phi)$. The solution is given by the first eigenvector of $\frac{1}{n}X^TX$, which yields scores whose variance is maximized and equates to the highest eigenvalue.
-
-Figure \@ref(fig:fig2) shows the extreme theoretical posibilities. The last step is extracting and scaling the first principal component of the sPCA.
-
-```{r, fig2, fig.align = 'center', fig.cap = "Theoretical cases: (a) spatial dependence, (b) no spatial dependence", fig.id = TRUE}
-knitr::include_graphics("PNG/Fig 2 - sACP.png")
-```
 :::
 
 ::: col_2
+::: columns
+::: {.column width="40%"}
+However, spatial PCA adds the constraint that the provided scores should be spatially autocorrelated and, thus, focuses on the spatial pattern of genetic variability. Two types of patterns are discriminated: global and local structures, corresponding respectively to large positive and large negative eigenvalues. This is acomplished by maximizing: $$
+C(v) = V(Xv)I(Xv) = \frac{1}{n}(Xv)^TLXv = \frac{1}{n}v^TX^TLXv
+$$ where $V$ is the variance, $X$ the demografic data matrix, $I()$ the Moran's $I$, which catch the spatial autocorrelation, $L$ the proximity matrix and $v$ the scaled axes in $R^{10}$, with $||v||^2 = 1$.
+
+Figure \@ref(fig:fig2) shows the extreme theoretical possibilities. The last step is extracting and scaling the first principal component of the sPCA.
+:::
+
+::: {.column width="58%"}
+```{r, fig2, out.width="95%", fig.align = 'center', dpi=1200, fig.cap = "Theoretical cases: (a) spatial dependence, (b) no spatial dependence", fig.id = TRUE}
+knitr::include_graphics("PNG/Fig 2 - sACP.png")
+```
+:::
+:::
+
 # Results
 
 ::: columns
@@ -112,19 +125,19 @@ Figure \@ref(fig:fig3) shows the adjusted semivariogram to a spherical model, re
 
 \- [**nugget**](): 1667.
 
-```{r, fig3, fig.align = 'center', fig.cap = "Semivariogram", fig.id = TRUE}
+```{r, fig3, fig.align = 'center', dpi=1200, fig.cap = "Semivariogram", fig.id = TRUE}
 knitr::include_graphics("PNG/Fig 3 - Semivariogram.png")
 ```
 :::
 
 ::: {.column width="2%"}
-```{r, blanco1, fig.align = 'center'}
+```{r, blanco2, fig.align = 'center'}
 knitr::include_graphics("PNG/Blanco.png")
 ```
 :::
 
 ::: {.column width="58%"}
-```{r, fig4, fig.align = 'center', fig.cap = "Principal results of spatial principal component analysis: (a) Eigenvalues of sPCA; (b) Map of sPCA scores of municipalities.", fig.id = TRUE}
+```{r, fig4, fig.align = 'center', dpi=1200, fig.cap = "Principal results of spatial principal component analysis: (a) Eigenvalues of sPCA; (b) Map of sPCA scores of municipalities.", fig.id = TRUE}
 knitr::include_graphics("PNG/Fig 4 - sPCA.png")
 ```
 
@@ -136,29 +149,28 @@ In the sPCA map (\@ref(fig:fig4)[b]()) three big areas of depopulation appear; n
 :::
 
 Finally, the sDRI (\@ref(fig:fig5)) is extracted from the first component of sPCA and scaled from 0 to 100. Municipalities are then classified from Albacete (sDRI = 0) to Arandilla del Arroyo (sDRI = 100). \@ref(fig:fig6) represents the sDRI in a map of Castilla-La Mancha.
+:::
 
 ::: columns
-::: {.column width="34%"}
-```{r, fig5, fig.align='center', fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI Indicator"}
+::: {.column width="40%"}
+```{r, fig5, fig.align='center', out.width="92%", dpi=1200, fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI"}
 knitr::include_graphics("PNG/Fig 5 - Lollipop.png")
 ```
 :::
 
-::: {.column width="66%"}
-```{r, fig6, fig.align='center', fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI Indicator"}
+::: {.column width="60%"}
+```{r, fig6, out.width="94%", fig.align='center', dpi=1200, fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI"}
 knitr::include_graphics("PNG/Fig 6 - sDRI.png")
 ```
 :::
 :::
-:::
+
 
 # Conclusions & Discussion
 
 The applied spatial principal component analysis results in a Depopulation Risk Index which identifies numerous areas as having a medium to high risk of depopulation; namely, the majority of villages of Cuenca and Guadalajara, and the west and the south of the region. Conversely, it shows no risk for the areas of La Mancha and the Sagra and Henares industrial corridors, as well as the provincial capitals, Talavera de la Reina and Puertollano (see Figure nº \@ref(fig:fig6)).
 
-We can conclude that Spatial Principal Component Analysis (sPCA) can be applied to demographic variables to construct an index to classify the municipalities of Castilla-La Mancha according to their depopulation risk.
-
-The scores of sDRI can be integrated into an expert system capable of identifying the areas in which counter-measures must be applied by local and regional governments.
+We can conclude that Spatial Principal Component Analysis (sPCA) can be applied to demographic variables to construct an index to classify the municipalities of Castilla-La Mancha according to their depopulation risk. The scores of sDRI can be integrated into an expert system capable of identifying the areas in which counter-measures can be applied by local and regional governments.
 
 # References
 
