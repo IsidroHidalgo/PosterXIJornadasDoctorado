@@ -5,7 +5,6 @@ body_textsize: "31px"
 caption_textsize: "22px"
 reference_textsize: "22px"
 
-#ESSENTIALS
 title: '**Design of a Spatial Depopulation Risk Indicator**'
 author:
   - name: '**Isidro Hidalgo Arellano & Gema Fernández-Avilés Calderón** Isidro.Hidalgo@uclm.es Gema.FAviles@uclm.es'
@@ -82,15 +81,9 @@ $\color{#FFC000}{\text{The range of spatial dependence is extracted from the sem
 \tag{1}
 \gamma(s_i-s_j) = \frac{1}{2}V((s_i)-Z(s_j)), \forall s_i,s_j\in D
 \end{equation}
-<<<<<<< HEAD
 where $s_i$ and $s_j$ are two municipalities of domain $D$, $V$ is the variance, and $Z(s)$ is the *Population Growth Rate* at municipality $s$.
 
 ```{r, fig2, out.width="77%", fig.align='center', dpi=1200, fig.cap="Components of a semivariogram"}
-=======
-where $s_i$ and $s_j$ are two municipalities of domain $D$, $V$ is the variance, and $Z(s)$ is the Population Growth Rate at municipality $s$.
-
-```{r, fig2, out.width="73%", fig.align='center', dpi=1200, fig.cap="Components of a semivariogram"}
->>>>>>> 08ba4fda30a814787bc4ea7665b8d83d2ab1169e
 knitr::include_graphics("PNG/Fig2-Semivariogram.png")
 ```
 
@@ -101,47 +94,13 @@ This set of variables define a 10-dimensional space where Euclidean distances be
 
 ::: col_2
 ::: columns
-<<<<<<< HEAD
-=======
-::: {.column width="40%"}
-Two types of spatial patterns are discriminated: global and local structures, corresponding respectively to large positive and large negative eigenvalues. This is accomplished by maximizing:
-\begin{equation}
-\tag{2}
-C(v) = V(Xv)I(Xv) = \frac{1}{n}(Xv)^TLXv = \frac{1}{n}v^TX^TLXv
-\end{equation}
-where $V$ is the variance, $X$ the demographic data matrix, $I()$ the Moran's $I$, which catch the spatial autocorrelation, $L$ the proximity matrix and $v$ the scaled axes in $R^{10}$, with $||v||^2 = 1$.
-
-Figure \@ref(fig:fig2) shows the extreme theoretical possibilities.
-
-The last step is $\color{#288A8C}{\text{extracting the first principal component of the sPCA}}$, $\color{#288A8C}{\text{scaling it from 0 to 100}}$ and $\color{#440E53}{\text{classify the municipalities with the sDRI}}$.
-:::
-
-::: {.column width="58%"}
-```{r, fig3, out.width="80%", fig.align = 'center', dpi=1200, fig.cap = "Theoretical cases: (a) spatial dependence, (b) no spatial dependence", fig.id = TRUE}
-knitr::include_graphics("PNG/Fig3-sACP.png")
-```
-:::
-:::
-
-# Results
-::: columns
-::: {.column width="40%"}
-This work starts with the construction of a semivariogram to analyze the spatial dependence and calculate its range. As shown in Figure \@ref(fig:fig4) the semivariogram is adjusted to a spherical model with the following parameters: [**range**]() of 60000 meters (60 km), [**sill**]() of 3419, and [**nugget**]() of 1667.
-
-```{r, fig4, fig.align = 'center', dpi=1200, fig.cap = "Adjusted semivariogram", fig.id = TRUE}
-knitr::include_graphics("PNG/Fig4-Semivariogram.png")
-```
-Once the range of spatial dependence is estimated to 60 km, the neighbourhood network is constructed and the spatial analysis of principal components of depopulation in Castilla-La Mancha is performed. The results of the sPCA are shown in Figure \@ref(fig:fig5).
-
-:::
-
->>>>>>> 08ba4fda30a814787bc4ea7665b8d83d2ab1169e
 ::: {.column width="2%"}
-```{r, blanco2, fig.align = 'center'}
+```{r, blanco1, fig.align = 'center'}
 knitr::include_graphics("PNG/Blanco.png")
 ```
 :::
-::: {.column width="39%"}
+
+::: {.column width="40%"}
 Two types of spatial patterns are discriminated: global and local structures, corresponding respectively to large positive and large negative eigenvalues. This is accomplished by maximizing:
 \begin{equation}
 \tag{2}
@@ -149,13 +108,12 @@ C(v) = V(Xv)I(Xv) = \frac{1}{n}(Xv)^TLXv = \frac{1}{n}v^TX^TLXv
 \end{equation}
 where $V$ is the variance, $X$ the demographic data matrix, $I()$ the Moran's $I$, which catch the spatial autocorrelation, $L$ the proximity matrix and $v$ the scaled axes in $R^{10}$, with $||v||^2 = 1$.
 
-<<<<<<< HEAD
 Figure \@ref(fig:fig2) shows the extreme theoretical possibilities.
 
 The final steps are $\color{#288A8C}{\text{the extraction of the first principal component}}$, $\color{#288A8C}{\text{the scaling from 0 to 100}}$ and the classification of the municipalities with the $\color{#440E53}{\text{sDRI}}$.
 :::
 
-::: {.column width="59%"}
+::: {.column width="58%"}
 ```{r, fig3, out.width="90%", fig.align = 'center', dpi=1200, fig.cap = "Theoretical cases: (a) spatial dependence, (b) no spatial dependence", fig.id = TRUE}
 knitr::include_graphics("PNG/Fig3-sACP.png")
 ```
@@ -188,29 +146,9 @@ knitr::include_graphics("PNG/Fig5-sPCA.png")
 The last step of the work is to extract the first component of sPCA and scale it from 0 to 100. The resulting sDRI is used to classify the municipalities from lack of depopulation risk (sDRI = 0) to extreme risk (sDRI = 100). As shown in Figure \@ref(fig:fig6)[-left]() Albacete is the municipality with absolute abscence of depopulation risk (sDRI = 0), followed by Guadalajara, Talavera de la Reina, Toledo and Azuqueca de Henares. At the other end we have Arandilla del Arroyo (sDRI = 100), followed by Alique, Valsalobre, Angón and Pineda de Cigüela. Figure \@ref(fig:fig6)[-right]() represents the sDRI in a map of municipalities of Castilla-La Mancha.
 :::
 :::
-
-
-
 ```{r, fig6, fig.align='left', out.width="98%", dpi=1200, fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI"}
-=======
-::: {.column width="58%"}
-
-The first two eigenvalues of sPCA (\@ref(fig:fig5)[a]()) show a strong global spatial dependence, whereas the last negatives eigenvalues reveal some local dependence; this is due to municipalities acting as development hubs, consequently earning population of neighbours. In the sPCA map (\@ref(fig:fig5)[b]()) three big areas of depopulation appear; namely the counties of Cuenca and Guadalajara, the west and the south of the region.
-```{r, fig5, out.width="95%", fig.align = 'center', dpi=1200, fig.cap = "Principal results of spatial principal component analysis: (a) Eigenvalues of sPCA; (b) Map of sPCA scores of municipalities.", fig.id = TRUE}
-knitr::include_graphics("PNG/Fig5-sPCA.png")
-```
-:::
-
-The last step of the work is to extract the first component of sPCA and scale it from 0 to 100. The resulting sDRI is used to classify the municipalities from lack of depopulation risk (sDRI = 0) to extreme risk (sDRI = 100). As shown in Figure \@ref(fig:fig6)[-left]() Albacete is the municipality with absolute abscence of depopulation risk (sDRI = 0), followed by Guadalajara, Talavera de la Reina, Toledo and Azuqueca de Henares. At the other end we have Arandilla del Arroyo (sDRI = 100), followed by Alique, Valsalobre, Angón and Pineda de Cigüela.
-
-Finally, Figure \@ref(fig:fig6)[-right]() represents the sDRI in a map of municipalities of Castilla-La Mancha.
-:::
-
-```{r, fig6, fig.align='center', out.width="100%", dpi=1200, fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI"}
->>>>>>> 08ba4fda30a814787bc4ea7665b8d83d2ab1169e
 knitr::include_graphics("PNG/Fig6-Lollipop-sDRI.png")
 ```
-
 
 # Conclusions & Discussion
 
