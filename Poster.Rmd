@@ -71,25 +71,29 @@ knitr::kable(datos, col.names = c("Population growth rate", "Number of Municipal
     -   To rank the municipalities of Castilla-La Mancha in terms of risk depopulation.
 
 # Methods
-As stated in the First Law of Geography, "Everything is related to everything else, but near things are more related than distant things" [**(Tobler, 1970)**](). Figure \@ref(fig:fig1) stands for the methodology used in this work:
+As stated in the First Law of Geography, "Everything is related to everything else, but near things are more related than distant things" [**(Tobler, 1970)**](). Since depopulation is a variable with spatial dependence, we deal with geostatistics and machine learning techniques to carry out our purpose. Figure \@ref(fig:fig1) stands for the methodology used in this work:
 
-```{r, fig1, out.width="43%", fig.align='center', dpi=1200, fig.cap="Methodology"}
+```{r, fig1, out.width="40%", fig.align='center', dpi=1200, fig.cap="Methodology"}
 knitr::include_graphics("PNG/Fig1-methodology.png")
 ```
-$\color{#FFC000}{\text{The range of spatial dependence is extracted from the semivariogram}}$, the instrument used *par excellence* to describe the spatial dependence in a regionalized variable [**(Montero et al., 2015)**]() (see Figure \@ref(fig:fig1)). The expression of the semivariogram $\gamma(s_i,s_j)$ is given by:
+The main aim of this study, the construction of a sDRI, is achieved with the following steps:
+
+1.The instrument used *par excellence* to $\color{#FFC000}{\text{detect the spatial dependence}}$ is the semivariogram [**(Montero et al., 2015)**](). Its expression is given by:
 \begin{equation}
 \tag{1}
 \gamma(s_i-s_j) = \frac{1}{2}V((s_i)-Z(s_j)), \forall s_i,s_j\in D
 \end{equation}
-where $s_i$ and $s_j$ are two locations (municipalities) in the domain $D$, $V$ is the variance, and $Z(s)$ is the *Population growth rate* at location (municipality) $s$.
+where $s_i$ and $s_j$ are two locations (municipalities) in the domain $D$, $V$ is the variance, and $Z(s)$ is the regionalized variable (*Population growth rate*) at location (municipality) $s$.
 
-```{r, fig2, out.width="77%", fig.align='center', dpi=1200, fig.cap="Components of a semivariogram"}
+2.$\color{#FFC000}{\text{The range of spatial dependence}}$ is extracted from the semivariogram (see Figure \@ref(fig:fig1)).
+```{r, fig2, out.width="70%", fig.align='center', dpi=1200, fig.cap="Components of a semivariogram"}
 knitr::include_graphics("PNG/Fig2-Semivariogram.png")
 ```
 
-Based on the adjusted semivariogram, $\color{#453780}{\text{a neighbourhood network}}$ is constructed in the form of a proximity matrix $L$. Then a $\color{#453780}{\text{spatial principal component analysis}}$ [**(Jombart, T. et al., 2008)**]() is applied to ten demographic variables [**(Jato-Espino & Mayor-Vitoria, 2023)**](): *population 2001*, *population 2020*, *youth (\<16 years) 2020*, *elder (\>64 years) 2020*, *growth population 2001-2020*, *population density  2020*, *natural increase rate 2010-2020*, *ageing index 2020*, *dependence index 2020* and *net migration rate 2010-2020*.
+3.Based on the range, $\color{#453780}{\text{a neighbourhood network}}$ is constructed in the form of a proximity matrix $L$. 
 
-This set of variables define a 10-dimensional space where Euclidean distances between the 919 entities are calculated.$\color{#453780}{\text{ Spatial PCA}}$ uses the constraint that the provided scores should be spatially autocorrelated and, thus, focuses on the spatial pattern of depopulation variability.
+4.Then a $\color{#453780}{\text{spatial principal component analysis}}$ [**(Jombart, T. et al., 2008)**]() is applied to ten demographic variables [**(Jato-Espino & Mayor-Vitoria, 2023)**]().*population 2001*, *population 2020*, *youth (\<16 years) 2020*, *elder (\>64 years) 2020*, *growth population 2001-2020*, *population density  2020*, *natural increase rate 2010-2020*, *ageing index 2020*, *dependence index 2020* and *net migration rate 2010-2020*.
+
 :::
 
 ::: col_2
@@ -110,11 +114,13 @@ where $V$ is the variance, $X$ the demographic data matrix, $I()$ the Moran's $I
 
 Figure \@ref(fig:fig2) shows the extreme theoretical possibilities.
 
-The final steps are $\color{#288A8C}{\text{the extraction of the first principal component}}$, $\color{#288A8C}{\text{the scaling from 0 to 100}}$ and the classification of the municipalities with the $\color{#440E53}{\text{sDRI}}$.
+5.$\color{#288A8C}{\text{The extraction of the first principal component}}$ is carried out.
+
+6.The sDRI for each municipality is obtained $\color{#288A8C}{\text{scaling from 0 to 100}}$ the principal component.
 :::
 
 ::: {.column width="58%"}
-```{r, fig3, out.width="90%", fig.align = 'center', dpi=1200, fig.cap = "Theoretical cases: (a) spatial dependence, (b) no spatial dependence", fig.id = TRUE}
+```{r, fig3, out.width="95%", fig.align = 'center', dpi=1200, fig.cap = "Theoretical cases: (a) spatial dependence, (b) no spatial dependence", fig.id = TRUE}
 knitr::include_graphics("PNG/Fig3-sACP.png")
 ```
 :::
@@ -123,7 +129,7 @@ knitr::include_graphics("PNG/Fig3-sACP.png")
 # Results
 ::: columns
 ::: {.column width="41%"}
-This work starts with the construction of a semivariogram to analyze the spatial dependence and calculate its range. As shown in Figure \@ref(fig:fig4) the semivariogram is adjusted to a spherical model with the following parameters: [**range**]() of 60000 meters (60 km), [**sill**]() of 3419, and [**nugget**]() of 1667.
+The first step is the estimation of a semivariogram to analyze the spatial dependence and calculate its range. As shown in Figure \@ref(fig:fig4) the semivariogram is adjusted to a spherical model with the following parameters: [**range**]() of 60000 meters (60 km), [**sill**]() of 3419, and [**nugget**]() of 1667.
 
 ```{r, fig4, out.width="100%", fig.align = 'center', dpi=1200, fig.cap = "Adjusted semivariogram", fig.id = TRUE}
 knitr::include_graphics("PNG/Fig4-Semivariogram.png")
@@ -140,13 +146,13 @@ knitr::include_graphics("PNG/Blanco.png")
 ::: {.column width="56%"}
 &nbsp;  
 The first two eigenvalues of sPCA (\@ref(fig:fig5)[a]()) show a strong global spatial dependence, whereas the last negatives eigenvalues reveal some local dependence; this is due to municipalities acting as development hubs, consequently earning population of neighbours. In the sPCA map (\@ref(fig:fig5)[b]()) three big areas of depopulation appear; namely the counties of Cuenca and Guadalajara, the west and the south of the region.
-```{r, fig5, out.width="90%", fig.align = 'center', dpi=1200, fig.cap = "Principal results of spatial principal component analysis: (a) Eigenvalues of sPCA; (b) Map of sPCA scores of municipalities.", fig.id = TRUE}
+```{r, fig5, out.width="85%", fig.align = 'center', dpi=1200, fig.cap = "Principal results of spatial principal component analysis: (a) Eigenvalues of sPCA; (b) Map of sPCA scores of municipalities.", fig.id = TRUE}
 knitr::include_graphics("PNG/Fig5-sPCA.png")
 ```
-The last step of the work is to extract the first component of sPCA and scale it from 0 to 100. The resulting sDRI is used to classify the municipalities from lack of depopulation risk (sDRI = 0) to extreme risk (sDRI = 100). As shown in Figure \@ref(fig:fig6)[-left]() Albacete is the municipality with absolute abscence of depopulation risk (sDRI = 0), followed by Guadalajara, Talavera de la Reina, Toledo and Azuqueca de Henares. At the other end we have Arandilla del Arroyo (sDRI = 100), followed by Alique, Valsalobre, Angón and Pineda de Cigüela. Figure \@ref(fig:fig6)[-right]() represents the sDRI in a map of municipalities of Castilla-La Mancha.
+The last step of the work is to extract the first component of sPCA and scale it from 0 to 100. The resulting sDRI is used to classify the municipalities from lack of depopulation risk (sDRI = 0) to extreme risk (sDRI = 100). As shown in Figure \@ref(fig:fig6)[-left]() Albacete is the municipality with absolute abscence of depopulation risk (sDRI = 0), followed by Guadalajara, Talavera de la Reina, Toledo and Azuqueca de Henares. In the opposite, we have Arandilla del Arroyo (sDRI = 100), followed by Alique, Valsalobre, Angón and Pineda de Cigüela. Figure \@ref(fig:fig6)[-right]() represents the sDRI in a map of municipalities of Castilla-La Mancha.
 :::
 :::
-```{r, fig6, fig.align='left', out.width="98%", dpi=1200, fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI"}
+```{r, fig6, fig.align='center', out.width="92%", dpi=1200, fig.cap="Depopulation Risk in municipalities of Castilla-La Mancha according to sDRI"}
 knitr::include_graphics("PNG/Fig6-Lollipop-sDRI.png")
 ```
 
@@ -154,7 +160,9 @@ knitr::include_graphics("PNG/Fig6-Lollipop-sDRI.png")
 
 The applied spatial principal component analysis results in a Depopulation Risk Index which identifies numerous areas as having a medium to high risk of depopulation; namely, the majority of villages of Cuenca and Guadalajara, and the west and the south of the region. Conversely, it shows no risk for the areas of La Mancha and the Sagra and Henares industrial corridors, as well as the provincial capitals, Talavera de la Reina and Puertollano (see Figure \@ref(fig:fig5)).
 
-We can conclude that Spatial Principal Component Analysis can be applied to demographic variables to construct an index to classify the municipalities of Castilla-La Mancha according to their depopulation risk. The scores of sDRI can be integrated into an expert system capable of identifying the areas in which counter-measures can be applied by local and regional governments.
+As far as we know, this is the firs time that this methodologies have been applied to mesure the depopulation risk, and, specifically, in the form of sDRI to classify the municipalities of Castilla-La Mancha.
+
+Related to the social ans policy implications, we propose to include the scores of sDRI into an expert system capable of identifying the areas in which counter-measures can be applied by local and regional governments.
 
 # References
 -   Jato-Espino, D.; Mayor-Vitoria, F. (2023). *A statistical and machine learning methodology to model rural depopulation risk and explore its attenuation through agricultural land use management*. Applied Geography, 152, 102870.
