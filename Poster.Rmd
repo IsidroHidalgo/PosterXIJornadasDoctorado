@@ -60,7 +60,7 @@ Table \@ref(tab:tabla) shows that [**445 municipalities of the region lost more 
 
 ```{r tabla}
 datos <- data.frame(population = c("loss >20%", "loss 10-20%", "loss 5-10%", "loss <5%", "gain <5%", "gain 5-20%", "gain >20%"), municipalities = c(445, 131, 62, 44, 43, 67, 127))
-knitr::kable(datos, col.names = c("Population Growth Rate", "Number of Municipalities"),caption = 'Number of municipalities according to growth rate between 2001 and 2020', align = c('l', 'r'),"html")
+knitr::kable(datos, col.names = c("Population growth rate", "Number of Municipalities"),caption = 'Number of municipalities according to growth rate between 2001 and 2020', align = c('l', 'r'),"html")
 ```
 
 # Objectives
@@ -76,12 +76,12 @@ As stated in the First Law of Geography, "Everything is related to everything el
 ```{r, fig1, out.width="43%", fig.align='center', dpi=1200, fig.cap="Methodology"}
 knitr::include_graphics("PNG/Fig1-methodology.png")
 ```
-$\color{#FFC000}{\text{The range of spatial dependence is extracted from the semivariogram}}$, the heart of Geostatistics [**(Montero et al., 2015)**](), which is a tool that catch the variability, hence the spatial dependence according to the distance (see Figure \@ref(fig:fig1)). The expression of the semivariogram $\gamma(s_i,s_j)$ is:
+$\color{#FFC000}{\text{The range of spatial dependence is extracted from the semivariogram}}$, the instrument used *par excellence* to describe the spatial dependence in a regionalized variable [**(Montero et al., 2015)**]() (see Figure \@ref(fig:fig1)). The expression of the semivariogram $\gamma(s_i,s_j)$ is given by:
 \begin{equation}
 \tag{1}
 \gamma(s_i-s_j) = \frac{1}{2}V((s_i)-Z(s_j)), \forall s_i,s_j\in D
 \end{equation}
-where $s_i$ and $s_j$ are two municipalities of domain $D$, $V$ is the variance, and $Z(s)$ is the *Population Growth Rate* at municipality $s$.
+where $s_i$ and $s_j$ are two locations (municipalities) in the domain $D$, $V$ is the variance, and $Z(s)$ is the *Population growth rate* at location (municipality) $s$.
 
 ```{r, fig2, out.width="77%", fig.align='center', dpi=1200, fig.cap="Components of a semivariogram"}
 knitr::include_graphics("PNG/Fig2-Semivariogram.png")
